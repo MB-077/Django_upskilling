@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{month | title}} Challenge
+{% endblock %}
+
+{% block content %}
+    {% include "challenges/includes/header.html" %}
+    
+    <h1>{{month | title}} Challenge</h1>  
+    {% if text is not None %}
+        <h2>{{text}}</h2>
+    {% else %}
+        <p>There is no challenge for this month yet!</p>
+    {% endif %}
+{% endblock %}
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{month | title}} Challenge</title>
+</head>
+<body>
+    <h1>{{month | title}} Challenge</h1>  
+    {% comment %} | title capitalizes the month {% endcomment %}
+{% comment %}
+    {% if text is not None %}
+        <h2>{{text}}</h2>
+    {% else %}
+        <p>There is no challenge for this month yet!</p>
+    {% endif %}
+</body>
+</html> {% endcomment %}

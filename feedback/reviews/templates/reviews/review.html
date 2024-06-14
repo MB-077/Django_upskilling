@@ -1,21 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Your Review</title>
-        {% comment %} <link rel="stylesheet" href="{% static "styles.css" %}">
-        {% block css_files %}{% endblock %} {% endcomment %}
-    </head>
-    <body>
+{% extends "reviews/base.html" %}
+
+{% block title%}Your review{% endblock %}
+
+{% block content %}
         <form action="/" method="POST">
             {% csrf_token %}
-            {% if has_error %}
-                <p style="color: red;">Please enter a valid username!</p>
-            {% endif %}
-            <label for="username">Your name</label>
-            <input id="username" name="username" type="text">
+            {% for field in form %}
+                <div class="form-control {% if field.errors %}errors{% endif %}">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+              </div>
+            {% endfor %}
+            {% comment %} <div class="form-control {% if form.user_name.errors %}errors{% endif %}">
+              {{ form.user_name.label_tag }}
+              {{ form.user_name }}
+              {{ form.user_name.errors }}
+            </div>
+            <div class="form-control {% if form.review_text.errors %}errors{% endif %}">
+                {{ form.review_text.label_tag }}
+                {{ form.review_text }}
+                {{ form.review_text.errors }}
+              </div>
+              <div class="form-control {% if form.rating.errors %}errors{% endif %}">
+                {{ form.rating.label_tag }}
+                {{ form.rating }}
+                {{ form.rating.errors }}
+              </div> {% endcomment %}
             <button type="submit">Send</button>
         </form>
-    </body>
-</html>
+{%  endblock %}
